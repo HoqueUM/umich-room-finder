@@ -13,7 +13,7 @@ def json_maker(scope, room=None, start_date=None, end_date=None):
     load_dotenv()
     classrooms = os.getenv('ACCESS_TOKEN')
     RoomID = room
-    class_requestUrl = f"https://gw.api.it.umich.edu/um/aa/ClassroomList/v2/Classrooms/{room}/Meetings"
+    class_requestUrl = f"https://gw.api.it.umich.edu/um/aa/ClassroomList/v2/Classrooms/{room}/Meetings?startDate={start_date}&endDate={end_date}"
     requestHeaders = {
         "Authorization": f"Bearer {classrooms}",
         "Accept": "application/json"
