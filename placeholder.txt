@@ -1,0 +1,56 @@
+from token_generator import token_generator
+import json
+from test import json_maker
+import datetime
+
+def get_meeting_times(room, start_date, end_date):
+    """
+    Fetch meeting times for a given room and date range.
+    """
+    token_generator('classrooms')
+    times = json_maker('classrooms', room=room, start_date=start_date, end_date=end_date)
+    return times['Classrooms']['Classroom']
+
+def main():
+    with open('classrooms.json', 'r') as file:
+        data = json.load(file)
+    classes = data['Classrooms']['Classroom']
+    today = datetime.date.today().strftime('%B %d, %Y')
+
+from token_generator import token_generator
+import json
+from test import json_maker
+import datetime
+
+def get_meeting_times(room, start_date, end_date):
+    """
+    Fetch meeting times for a given room and date range.
+    """
+    token_generator('classrooms')
+    times = json_maker('classrooms', room=room, start_date=start_date, end_date=end_date)
+    return times['Classrooms']['Classroom']
+
+def get_class():
+    with open('classrooms.json', 'r') as file:
+        data = json.load(file)
+
+    classes = data['Classrooms']['Classroom']
+    today = datetime.date.today().strftime('%B %d, %Y')
+    march20 = '03-20-2024'
+    schedule_dict = {}
+    limiter = 0
+    for classroom in classes:
+        facility_id = classroom['FacilityID']
+        times = get_meeting_times(facility_id, march20, march20)
+        time_intervals = [(meeting['MtgStartTime'], meeting['MtgEndTime']) for meeting in times]
+        schedule_dict[facility_id] = time_intervals
+        print(f'Classroom: {facility_id}')
+
+        limiter += 1
+        if limiter == 3:
+            break
+
+    return schedule_dict
+
+if __name__ == "__main__":
+    main()
