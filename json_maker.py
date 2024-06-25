@@ -22,4 +22,3 @@ def json_maker(scope, room=None, start_date=None, end_date=None):
     response = requests.get(class_requestUrl, headers=requestHeaders)
     return response.json()
 
-#json_maker('classrooms')
