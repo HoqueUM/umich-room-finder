@@ -18,7 +18,6 @@ def get_intervals():
     today = datetime.date.today().strftime('%B %d, %Y')
     march20 = '03-20-2024'
     schedule_dict = {}
-    limiter = 0
     for classroom in classes:
         facility_id = classroom['FacilityID']
         times = get_meeting_times(facility_id, march20, march20)
@@ -28,9 +27,6 @@ def get_intervals():
             end_time = meeting['MtgEndTime']
             time_intervals.append((start_time, end_time))
         schedule_dict[facility_id] = time_intervals
-        limiter += 1
-        if limiter == 5:
-            break
     return schedule_dict
 
 def to_datetime(time_str):
